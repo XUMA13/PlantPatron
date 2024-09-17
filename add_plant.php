@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 session_start();
-
+//plants infoo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $category = $_POST['category'];
