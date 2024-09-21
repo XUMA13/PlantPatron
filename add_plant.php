@@ -1,4 +1,8 @@
 <?php
+echo "PHP is working";
+?>
+
+<?php
 include 'db.php';
 session_start();
 //plants infoo
