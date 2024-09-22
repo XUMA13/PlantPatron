@@ -20,7 +20,6 @@ $stmt->execute();
 $plants = $stmt->get_result();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $plant_id = $_POST['plant_id'];
     $task_name = $_POST['task_name'];
     $task_description = $_POST['task_description'];
     $task_date = $_POST['task_date'];
