@@ -1,44 +1,89 @@
 <?php
-session_start();  // Start session to manage user logins
-include 'db.php';  // Assuming 'db.php' is the file with your database connection
+include('db.php');
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Check if the user is logged in (assumes you store user ID in session upon login)
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");  // Redirect to login page if not logged in
-    exit();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Retrieve user from the `plant_owner` table by email
+    $stmt = $conn->prepare("SELECT ID, NAME, PASSWORD, PHONE, DATE_JOINED FROM plant_owner WHERE EMAIL = ?");
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+
+        // Assuming plain text passwords (but you should use password hashing)
+        if ($user['PASSWORD'] === $password) {
+            $_SESSION['user_id'] = $user['ID'];
+            $_SESSION['username'] = $user['NAME'];
+            $_SESSION['date_joined'] = $user['DATE_JOINED'];
+            header("Location: dashboard.php"); // Redirect to plant list
+            exit();
+        } else {
+            $error = "Incorrect password!";
+        }
+    } else {
+        $error = "No user found with that email!";
+    }
 }
-
-// Fetch the logged-in user's name (optional, for a personalized greeting)
-
-
-
-$stmt = $conn->prepare("SELECT NAME FROM PLANT_OWNER WHERE ID = ?");
-$stmt->bind_param('i', $user_id);
-$stmt->execute();
-$plants = $stmt->get_result();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Patron Homepage</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-    
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="form_container">
+        <div class="overlay"></div>
 
-<div class="container my-5">
-        <h1>Welcome to Plant Patron, <?= $_SESSION['name']; ?>!</h1>
-        <p>Please choose an option below:</p>
-        <div class="mt-3">
-            <a href="plant_list.php" class="btn btn-primary">View Plant List</a>
-            
+        <div class="titleDiv">
+            <h1 class="title">Login</h1>
+            <span class="subTitle">Welcome back!</span>
         </div>
+
+        <!-- Display error message if login fails -->
+        <?php
+        if (isset($error)) {
+            echo '<span class="fail">' . $error . '</span>';
+        }
+        ?>
+
+        <!-- Login form -->
+        <form action="" method="POST">
+            <div class="rows grid">
+                <!-- Email -->
+                <div class="row">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <!-- Password -->
+                <div class="row">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <!-- Submit Button -->
+                <div class="row">
+                    <input type="submit" id="submitBtn" name="submit" value="Login">
+                    <span class="registerLink">Don't have an account? <a href="register.php">Register</a></span>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
 </html>
 
-  
+
+
+
+
