@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user['ID'];
             $_SESSION['name'] = $user['NAME'];
             $_SESSION['date_joined'] = $user['DATE_JOINED'];
-            header("Location: plant_list.php"); // Redirect to plant list
+            header("Location: index.php"); // Redirect to homepage
             exit();
         } else {
             $error = "Incorrect password!";
