@@ -9,7 +9,7 @@
 <body>
     <div class="container my-5">
         <h1>Welcome to Plant Patron</h1>
-        <p>Please choose an option below to use PlantPatron:</p>
+        <p>Please choose an option below to use PlantPatron!:</p>
         <div class="mt-3">
             <a href="login.php" class="btn btn-primary">Login</a>
             <a href="signup.php" class="btn btn-success">Sign Up</a>
