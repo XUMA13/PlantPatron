@@ -52,6 +52,8 @@ $plants = $stmt->get_result();
                             <td>
                                 <a href="delete_plant.php?id=<?= $plant['PLANT_ID']; ?>" class="btn btn-danger">Delete</a>
                                 <a href="view_plant.php?id=<?= $plant['PLANT_ID']; ?>" class="btn btn-primary">View</a>
+                                <a href="progress.php?plant_id=<?= $plant['PLANT_ID']; ?>" class="btn btn-info">Progress</a>
+                                <a href="health_condition.php?plant_id=<?= $plant['PLANT_ID']; ?>" class="btn btn-info">Health</a>
                             </td>
                         </tr>
                     <?php endwhile; ?>
