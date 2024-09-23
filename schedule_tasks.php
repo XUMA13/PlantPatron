@@ -170,6 +170,70 @@ $tasks = $stmt->get_result();
             <p>No tasks found for this plant.</p>
         <?php endif; ?>
 
+        
+
+    
+
+
+        <script>
+            // Function to trigger a notification
+            function notifyUser(taskName) {
+                if (!("Notification" in window)) {
+                    alert("This browser does not support desktop notifications.");
+                } else if (Notification.permission === "granted") {
+                    new Notification("Task Reminder", {
+                        body: "It's time to complete the task: " + taskName
+                    });
+                } else if (Notification.permission !== "denied") {
+                    Notification.requestPermission().then(function(permission) {
+                        if (permission === "granted") {
+                            new Notification("Task Reminder", {
+                                body: "It's time to complete the task: " + taskName
+                            });
+                        }
+                    });
+                }
+            }
+
+            // Function to check tasks periodically
+            function checkDueTasks() {
+                const currentTime = new Date();
+                console.log("Current Time:", currentTime); // Log current time
+
+                fetch('get_due_tasks.php')
+                    .then(response => response.json())
+                    .then(tasks => {
+                        console.log("Fetched tasks:", tasks); // Log fetched tasks
+                        tasks.forEach(task => {
+                            const taskTime = new Date(task.TASK_DATE + 'T' + task.TASK_TIME);
+                            console.log(`Task: ${task.TASK_NAME}, Due Time: ${taskTime}, Done: ${task.DONE_TASKS}`); // Log each task
+
+                            // Check if the task is due within 5 minutes
+                            const dueTime = new Date(taskTime.getTime() - (5 * 60 * 1000)); // 5 minutes before due time
+                            if (dueTime <= currentTime && task.DONE_TASKS == 0) {
+                                notifyUser(task.TASK_NAME);
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Error fetching due tasks:', error));
+            }
+
+            // Request notification permission on page load
+            if (Notification.permission === "default") {
+                Notification.requestPermission();
+            }
+
+            
+
+            // Check for due tasks every minute
+            setInterval(checkDueTasks, 60000); // 60000 ms = 1 minute
+
+            // Optional: Check immediately on page load
+            checkDueTasks();
+        </script>
+
+
+
     </div>
 </body>
 </html>
