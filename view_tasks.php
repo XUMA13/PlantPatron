@@ -68,7 +68,7 @@ $tasks = $stmt->get_result();
 <body>
     <div class="container my-5">
         <h1>Tasks for <?= htmlspecialchars($plant['NAME']); ?></h1>
-        <a href="plant_list.php" class="btn btn-secondary mb-3">Back to Plant List</a>
+        <a href="task_list.php" class="btn btn-secondary mb-3">Back to Task List</a>
 
         <h3>Task List</h3>
         <?php if ($tasks->num_rows > 0): ?>
