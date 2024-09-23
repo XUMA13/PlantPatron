@@ -32,6 +32,8 @@ $plants = $stmt->get_result();
         <a href="logout.php" class="btn btn-danger mb-3">Logout</a>
 
         <a href="add_plant.php" class="btn btn-success mb-3">Add New Plant</a>
+        <!-- Back to Dashboard button -->
+        <a href="index.php" class="btn btn-secondary mb-3">Back to Dashboard</a>
 
         <?php if ($plants->num_rows > 0): ?>
             <table class="table">
