@@ -55,11 +55,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <form action="add_plant.php" method="POST">
     <div class="form-group my-4">
         <label for="name">Plant Name:</label>
+        <small class="form-text text-muted">The name you want to assign to this plant.</small>
         <input type="text" class="form-control" name="name" required>
     </div>
-    
+
     <div class="form-group my-4">
         <label for="category">Category:</label>
+        <small class="form-text text-muted">The type or category of the plant (e.g., Succulent, Herb).</small>
         <select class="form-control" name="category" required>
             <option value="">Select Category</option>
             <option value="Succulent">Succulent</option>
@@ -77,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group my-4">
         <label for="sunlight">Sunlight Info:</label>
+        <small class="form-text text-muted">Required sunlight level for the plant (e.g., Full Sun, Partial Sun).</small>
         <select class="form-control" name="sunlight" required>
             <option value="">Select Sunlight Info</option>
             <option value="Full Sun">Full Sun</option>
@@ -89,6 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group my-4">
         <label for="pot_size">Pot Size:</label>
+        <small class="form-text text-muted">The size of the pot the plant is in (e.g., Small, Medium).</small>
         <select class="form-control" name="pot_size" required>
             <option value="">Select Pot Size</option>
             <option value="Small (under 6 inches)">Small (under 6 inches)</option>
@@ -100,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group my-4">
         <label for="fertilizer">Fertilizer:</label>
+        <small class="form-text text-muted">Recommended fertilizer for this plant (e.g., Organic, Slow Release).</small>
         <select class="form-control" name="fertilizer" required>
             <option value="">Select Fertilizer</option>
             <option value="Organic">Organic</option>
@@ -114,6 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group my-4">
         <label for="leaf_condition">Leaf Condition:</label>
+        <small class="form-text text-muted">The current health of the plant's leaves (e.g., Healthy, Wilting).</small>
         <select class="form-control" name="leaf_condition" required>
             <option value="">Select Leaf Condition</option>
             <option value="Healthy">Healthy</option>
@@ -127,6 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group my-4">
         <label for="watering_status">Watering Status:</label>
+        <small class="form-text text-muted">The current water needs of the plant (e.g., Overwatered, Well-Hydrated).</small>
         <select class="form-control" name="watering_status" required>
             <option value="">Select Watering Status</option>
             <option value="Overwatered">Overwatered</option>
@@ -139,6 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group my-4">
         <label for="expected_life_span">Expected Life Span:</label>
+        <small class="form-text text-muted">The typical lifespan of this plant (e.g., Annual, Perennial).</small>
         <select class="form-control" name="expected_life_span" required>
             <option value="">Select Expected Life Span</option>
             <option value="Annual (1 year)">Annual (1 year)</option>
@@ -149,11 +157,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group my-4">
         <label for="age">Age of Plant:</label>
+        <small class="form-text text-muted">The current age of the plant (e.g., 2 months, 1 year).</small>
         <input type="text" class="form-control" name="age" required>
     </div>
 
     <div class="form-group my-4">
         <label for="location">Location:</label>
+        <small class="form-text text-muted">The place where the plant is located (e.g., Indoor - Living Room).</small>
         <select class="form-control" name="location" required>
             <option value="">Select Location</option>
             <option value="Indoor - Living Room">Indoor - Living Room</option>
@@ -176,6 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group my-4">
         <label for="species">Species:</label>
+        <small class="form-text text-muted">The species or scientific name of the plant (e.g., Monstera deliciosa).</small>
         <input type="text" class="form-control" name="species" required>
     </div>
 
@@ -183,3 +194,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Add Plant" class="btn btn-primary">
     </div>
 </form>
+
